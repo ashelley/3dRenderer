@@ -12,7 +12,7 @@ bool is_running = false;
 uint32_t window_width = 800;
 uint32_t window_height = 600;
 vec3 camera_pos = { .x = 0, .y = 0, .z = -5 };
-float fov_factors = 640;
+float fov_factor = 640;
 
 SDL_Texture* screen_texture = NULL;
 uint32_t* screen_buffer = NULL;
@@ -48,7 +48,7 @@ bool initalize_window(void) {
 	return true;
 }
 
-void setup(void) {
+void initialize_screen() {
 	screen_buffer = (uint32_t*)malloc(sizeof(uint32_t) * window_width * window_height);
 	screen_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, window_width, window_height);
 }
@@ -84,5 +84,30 @@ void blank_screen(uint32_t color) {
 		}
 	}
 }
+
+void set_pixel(int x, int y, uint32_t color) {
+	if (x >= 0 && x < window_width && y >= 0 && y < window_height) {
+		screen_buffer[(window_width * y) + x] = color;
+	}
+}
+
+void draw_rect(int x, int y, int width, int height, uint32_t color) {
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j++) {
+			int current_x = x + i;
+			int current_y = y + j;
+			set_pixel(current_x, current_y, color);
+		}
+	}
+}
+
+vec2 project(vec3 point) {
+	vec2 projected = {
+		.x = (fov_factor * point.x) / point.z,
+		.y = (fov_factor * point.y) / point.z
+	};
+	return projected;
+}
+
 
 #endif
