@@ -32,6 +32,7 @@ void pixel_grid(void) {
 
 
 #define N_POINTS (9 * 9 * 9)
+vec3 cube_rotation = { .x = 0, .y = 0, .z = 0 };
 vec3 cube_points[N_POINTS]; // 9x9x9 cube
 vec2 projected_points[N_POINTS];
 
@@ -48,11 +49,21 @@ void initialize_point_cube() {
 }
 
 void update_point_cube() {
+
+	cube_rotation.x += 0.01;
+	cube_rotation.y += 0.01;
+	cube_rotation.z += 0.01;
+
 	for (int i = 0; i < N_POINTS; i++) {
 		vec3 point = cube_points[i];
-		point.z -= camera_pos.z;
 
-		vec2 projected_point = project(point);
+		vec3 transformed = rotate_x(point, cube_rotation.x);
+		transformed = rotate_y(transformed, cube_rotation.y);
+		transformed = rotate_z(transformed, cube_rotation.z);
+
+		transformed.z -= camera_pos.z;
+
+		vec2 projected_point = project(transformed);
 
 		projected_points[i] = projected_point;
 	}
