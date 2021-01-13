@@ -2,6 +2,7 @@
 #define SCENE_H
 
 #include "renderer.h"
+#include "drawing.h"
 
 #define N_POINTS (9 * 9 * 9)
 vec3 cube_rotation = { .x = 0, .y = 0, .z = 0 };

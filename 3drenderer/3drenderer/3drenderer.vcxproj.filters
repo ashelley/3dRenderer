@@ -24,5 +24,8 @@
     <ClInclude Include="scene_point_cube.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="scene_cube_mesh.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

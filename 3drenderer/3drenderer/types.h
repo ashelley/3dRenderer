@@ -10,10 +10,38 @@ typedef struct {
 } vec2;
 
 typedef struct {
-	float x;
-	float y;
-	float z;
+    union {
+        float x;
+        float a;
+    };
+
+    union {
+        float y;
+        float b;
+    };
+
+    union {
+        float z;
+        float c;
+    };
 } vec3;
+
+typedef struct {
+    union {
+        int x;
+        int a;
+    };
+
+    union {
+        int y;
+        int b;
+    };
+
+    union {
+        int z;
+        int c;
+    };
+} vec3i;
 
 static vec3 rotate_x(vec3 v, float angle) {
     vec3 rotated_vector = {
@@ -41,6 +69,10 @@ static vec3 rotate_z(vec3 v, float angle) {
     };
     return rotated_vector;
 }
+
+typedef struct {
+    vec2 points[3];
+} triangle;
 
 
 #endif

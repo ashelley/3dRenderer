@@ -1,7 +1,8 @@
 #include "renderer.h"
 #include "drawing.h"
 
-#include "scene_point_cube.h"
+//#include "scene_point_cube.h"
+#include "scene_cube_mesh.h"
 
 void setup(void) {
 	initialize_screen();
