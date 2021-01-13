@@ -1,20 +1,23 @@
 #include "renderer.h"
-#include "scenes.h"
+#include "drawing.h"
+
+#include "scene_point_cube.h"
 
 void setup(void) {
 	initialize_screen();
-	initialize_point_cube();
+	scene_initialize();
 }
 
 void update(void) {
-	update_point_cube();
+	wait_for_next_frame();
+	scene_update();
 }
 
 void render(void) {
 	blank_screen(0xFF000000);
-	//line_grid();
-	pixel_grid();
-	draw_projected_points();
+	//draw_line_grid();
+	draw_pixel_grid();
+	scene_render();
 	blit_screen();
 	SDL_RenderPresent(renderer);
 }

@@ -17,6 +17,8 @@ float fov_factor = 640;
 SDL_Texture* screen_texture = NULL;
 uint32_t* screen_buffer = NULL;
 
+float frame_target_time = 1000 / 60;
+float previous_frame_time = 0;
 
 bool initalize_window(void) {
 	if (SDL_Init(SDL_INIT_EVERYTHING)) {
@@ -51,6 +53,16 @@ bool initalize_window(void) {
 void initialize_screen() {
 	screen_buffer = (uint32_t*)malloc(sizeof(uint32_t) * window_width * window_height);
 	screen_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, window_width, window_height);
+}
+
+void wait_for_next_frame() {
+	int time_to_wait = frame_target_time - (SDL_GetTicks() - previous_frame_time);
+
+	if (time_to_wait > 0 && time_to_wait <= frame_target_time) {
+		SDL_Delay(time_to_wait);
+	}
+
+	previous_frame_time = SDL_GetTicks();
 }
 
 bool process_input(void) {
@@ -88,16 +100,6 @@ void blank_screen(uint32_t color) {
 void set_pixel(int x, int y, uint32_t color) {
 	if (x >= 0 && x < window_width && y >= 0 && y < window_height) {
 		screen_buffer[(window_width * y) + x] = color;
-	}
-}
-
-void draw_rect(int x, int y, int width, int height, uint32_t color) {
-	for (int i = 0; i < width; i++) {
-		for (int j = 0; j < height; j++) {
-			int current_x = x + i;
-			int current_y = y + j;
-			set_pixel(current_x, current_y, color);
-		}
 	}
 }
 

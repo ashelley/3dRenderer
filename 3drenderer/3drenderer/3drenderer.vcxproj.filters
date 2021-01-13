@@ -10,15 +10,18 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scenes.h">
+    <ClCompile Include="types.h">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="types.h">
+    <ClCompile Include="drawing.h">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_point_cube.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

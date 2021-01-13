@@ -150,11 +150,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
-    <ClCompile Include="scenes.h" />
+    <ClCompile Include="drawing.h" />
     <ClCompile Include="types.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="scene_point_cube.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
